@@ -1,5 +1,4 @@
-# STM32 Blue Pill: From "Clone Hell" to Arduino USB Success
-
+# STM32 Blue Pill: How to upload code via Arduino IDE without using an stlink
 **Project Status: SUCCESS**
 
 ![STM32 Blue Pill running the blink sketch via USB bootloader](stm32-code-uploaded.jpeg)
