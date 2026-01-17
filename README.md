@@ -1,4 +1,5 @@
-# STM32 Blue Pill: How to upload code via Arduino IDE without using an stlink
+# STM32 Blue Pill: How to upload code using the Arduino IDE and avoid using the stlink utility.
+
 **Project Status: SUCCESS**
 
 ![STM32 Blue Pill running the blink sketch via USB bootloader](stm32-code-uploaded.jpeg)
@@ -87,19 +88,30 @@ Clone chips/dongles require specific "slow and forceful" settings.
 ## 6. Phase 3: The Windows Driver Battle
 *Goal: Make Windows recognize the board as "Maple DFU" so Arduino IDE can talk to it.*
 
-### 6.1 Disabling Driver Signature Enforcement
-Windows 10/11 blocks the old Maple drivers by default.
-1.  **Settings** > Update & Security > Recovery > **Advanced Startup (Restart Now)**.
-2.  Troubleshoot > Advanced Options > Startup Settings > Restart.
-3.  Press **7** (Disable driver signature enforcement).
+### 6.1 The "Access Denied" Error
+When running `install_drivers.bat`, the command window may close immediately without installing anything. This is because Windows blocks the script from accessing system folders.
+* **Solution:** Do NOT use the batch file. Use the "Manual Install" method below.
 
-### 6.2 Installing the Driver
-1.  Plug in the Blue Pill via USB. It will appear as `Maple 003` (with a warning).
+### 6.2 The "Unsigned Driver" Error
+When manually updating the driver via Device Manager, Windows 10/11 may refuse to install it because the Maple drivers are old and unsigned.
+* **Error Message:** *"Windows encountered a problem installing the drivers... A problem was encountered while attempting to add the driver to the store."*
+
+### 6.3 The Fix: Disable Driver Signature Enforcement
+To bypass this security block, we must restart Windows in a special mode:
+1.  Go to **Settings** > **Update & Security** > **Recovery**.
+2.  Under "Advanced startup," click **Restart now**.
+3.  Select **Troubleshoot** > **Advanced options** > **Startup Settings**.
+4.  Click **Restart**.
+5.  When the menu appears, press **7** (or F7) to select **"Disable driver signature enforcement"**.
+
+### 6.4 Installing the Driver (Final Success)
+Once Windows reboots in this mode:
+1.  Plug in the Blue Pill via USB. It appears as `Maple 003` (with a yellow warning).
 2.  Open **Device Manager**.
 3.  Right-click `Maple 003` > **Update Driver** > **Browse my computer**.
 4.  Select the `drivers/win` folder downloaded from the Arduino_STM32 repo.
-5.  **Accept the Red Warning** ("Install this driver software anyway").
-6.  Success: Device should now list as **"Maple DFU"**.
+5.  **Important:** A red warning box will appear asking if you want to install this unsigned driver. Click **"Install this driver software anyway"**.
+6.  **Success:** The device will rename to **"Maple DFU"**.
 
 ---
 
