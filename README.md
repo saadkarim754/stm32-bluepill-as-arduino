@@ -1,5 +1,12 @@
 # STM32 Blue Pill: From "Clone Hell" to Arduino USB Success
 
+**Project Status: SUCCESS**
+
+![STM32 Blue Pill running the blink sketch via USB bootloader](stm32-code-uploaded.jpeg)
+*Above: The Blue Pill running the blink sketch, uploaded directly via USB without an ST-Link.*
+
+---
+
 ## 1. Project Overview
 **Objective:** To set up a cheap STM32F103C8T6 "Blue Pill" development board to work with the Arduino IDE, allowing for **direct USB uploads** and **Serial Monitor debugging**, completely bypassing the need for an external programmer after the initial setup.
 
